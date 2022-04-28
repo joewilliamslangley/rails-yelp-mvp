@@ -3,7 +3,19 @@
 <p><%= @restaurant.phone_number %></p>
 <p><%= @restaurant.category %></p>
 
+<h2>Reviews</h2>
 
+<% @reviews.each do |review| %>
+  <h6><%= "Rating: #{review.rating}/5" %></h6>
+  <p><%= review.content %></p>
+<% end %>
 
-<p><%= link_to "Add review", new_restaurant_review_path(@restaurant) %></p>
 <p><%= link_to "Back to restaurants", restaurants_path %></p>
+
+<h2>Add review</h2>
+
+<%= simple_form_for([ @restaurant, @review ]) do |f| %>
+  <%= f.input :rating %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
